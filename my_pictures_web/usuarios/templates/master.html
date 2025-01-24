@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block titulo %}
+        {% endblock %}
+    </title>
+
+    
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+</head>
+<body>
+
+    <div class="bg-dark text-white py-3 d-xs-12 d-md-6 d-sm-6 ">
+        <div class="container d-flex justify-content-between align-items-center">
+          <div>
+            <a href="index.html"><img src="\assets\img\logo.png" class="@media d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
+    
+          </div>
+            <h1 class="h3">Colección de pinturas</h1>
+            <nav>
+                <ul id="navbar" class="nav nav-xs-12 nav-md-6 nav-sm-6">
+                    <li class="nav-item"><a class="nav-link text-white" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="planillaPinturasDina.html">Pinturas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a href="/crear-pintura" class="nav-link link-light">Subir Pintura</a></li>
+                    <li id="registro" class="nav-item"><a class="nav-link text-white" href="re.html">Registro</a></li>
+                    <li id="login" class="nav-item"><a class="nav-link text-white" href="login.html">Log In</a></li>
+                    <!--Aqui tiene que ir el % if login como admin o usuario %
+                    <li class="nav-item"><a href="/pintores" class="nav-link link-light">Miembros</a></li>
+                    <li class="nav-item"><a href="/crear-pintor" class="nav-link link-light">Crear Miembro</a></li>
+                        -->
+                    <div id ="search">
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-outline-warning btn-succes" type="submit">Buscar</button>
+                      </form>
+                    </div>  
+    
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav bg-dark">
+            <li class="nav-item"><a href="/" class="nav-link link-light">Home</a></li>
+  
+
+        </ul>
+
+    </div>
+
+
+    {% block contenido %}
+    {% endblock %}
+
+    
+</body>
+</html>

@@ -1,0 +1,201 @@
+/*Aplicar estilos a toda la página (global)*/
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/*Header*/
+.cabecera{
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav ul{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li{
+    margin: 0 1rem;
+}
+
+.nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover{
+    color: #ffcc00;
+}
+
+/*Footer*/
+footer{
+    background-color: #eeff00;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/*index.html*/
+/*BEM: B:bloque, E:elemento, M:modificador*/
+.principal{
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(to bottom, #007bff, #0056b3);
+    color: white;
+}
+.principal__titulo{
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.principal__parrafo{
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.principal__btn-comprar{
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.principal__btn-comprar:hover{
+    background-color: #e6b800;
+}
+
+/*productos.html*/
+.productos__titulo{
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.productos__tabla{
+    width: 80%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.productos__tabla th, .productos__tabla td{
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+.productos__tabla th{
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+.productos__tabla tr:hover{
+    background-color: #f1f1f1;
+}
+
+/*contacto.html*/
+.contacto{
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+.contacto__titulo{
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.contacto__formulario label{
+    display: block;
+}
+.contacto__formulario input, 
+.contacto__formulario textarea, 
+.contacto__formulario button{
+    width: 100%;
+    padding: 0.8rem 0rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.contacto__formulario input:focus,
+.contacto__formulario textarea:focus{
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+.contacto__formulario textarea{
+    resize: vertical;
+    height: 100px;
+}
+.contacto__formulario button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+.contacto__formulario button:hover{
+    background-color: #0056b3;
+}
+
+/*Media query: nos permite trabajar responsividad
+responsivo: se adapta al dispositivo.*/
+
+.servicio__img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    
+}
+
+.carousel{
+    width: 300px;
+}
+
+@media (min-width:320px)  { 
+    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+        table, p, img {
+        padding-right: 1em;
+        width: 100%;
+        border: red 2px solid;
+        margin: 20px;        
+        }
+}
+@media (min-width:480px)  { 
+    /* smartphones, Android phones, landscape iPhone */ 
+}
+@media (min-width:600px)  { 
+    /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+}
+@media (min-width:801px)  { 
+    /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+}
+@media (min-width:1025px) { 
+    /* big landscape tablets, laptops, and desktops */ 
+}
+@media (min-width:1281px) { 
+    /* hi-res laptops and desktops */ 
+}

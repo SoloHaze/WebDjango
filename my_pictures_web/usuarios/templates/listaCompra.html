@@ -1,0 +1,77 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+    Pintura
+{% endblock %}
+{% block contenido %}
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="index.html"><img src="assets\img\logo.png"></a>
+            <h1 class="h3">Coleccion de Pinturas</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="pinturas.html">Pinturas Totales</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="login.html">Log In</a></li>                                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center text-primary mb-4">Planilla de Pinturas</h2>
+            <table class="table table-striped table-hover ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Autor</th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arbol de la creacion</td>
+                        <td>Innovador</td>
+                        <td>$5000 Dolares</td>
+                        <td>Autor Desconocido</td>
+                        <td><a href="#"><button type="button" class="btn btn-warning" >Comprar</button></a></td>                        
+                    </tr>
+                    <tr>
+                        <td>Colibri de marmol</td>
+                        <td>Innovador</td>
+                        <td>$3000 Dolares</td>
+                        <td>Autor Desconocido</td>
+                        <td><a href="#"><button type="button" class="btn btn-warning" >Comprar</button></a></td>
+                    </tr>
+                    <tr>
+                        <td>Noche Estrellada</td>
+                        <td>Alta Calidad</td>
+                        <td>$20000 Dolares</td>
+                        <td>Vincent Van Gogh</td>
+                        <td><a href="#"><button type="button" class="btn btn-warning" >Comprar</button></a></td>                        
+                    </tr>
+                    <tr>
+                        <td>Gioconda o Monna lisa</td>
+                        <td>Alta Calidad</td>
+                        <td>$50000 Dolares</td>
+                        <td>Leonardo da Vinci</td>
+                        <td><a href="#"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button></a></td>                   
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
+    </section>
+
+    <footer class="bg-primary text-white text-center py-3">
+        <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
+    </footer>
+
+
+{% endblock %}
