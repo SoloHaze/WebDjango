@@ -26,15 +26,26 @@
             <nav>
                 <ul id="navbar" class="nav nav-xs-12 nav-md-6 nav-sm-6">
                     <li class="nav-item"><a class="nav-link text-white" href="/">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="planillaPinturasDina.html">Pinturas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/planillaPinturasDina">Pinturas</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
-                    <li class="nav-item"><a href="/crear-pintura" class="nav-link link-light">Subir Pintura</a></li>
-                    <li id="registro" class="nav-item"><a class="nav-link text-white" href="re.html">Registro</a></li>
-                    <li id="login" class="nav-item"><a class="nav-link text-white" href="login.html">Log In</a></li>
-                    <!--Aqui tiene que ir el % if login como admin o usuario %
+
+                    {% if request.session.usuarioTipo == 'pintor' %}
+                        <li class="nav-item"><a href="/crear-pintura" class="nav-link link-light">Subir Pintura</a></li>
+                    {% endif %}
+                    
+                    {% if request.session.usuario_id %}
+                        <li id="login" class="nav-item"><a class="nav-link text-white" href="/logout">Log Out</a></li>
+                    {% else  %}
+                        <li id="registro" class="nav-item"><a class="nav-link text-white" href="/crear-pintor">Registro</a></li>
+                        <li id="login" class="nav-item"><a class="nav-link text-white" href="/loginn">Log In</a></li>
+                    {% endif %}                    
+                        <!--Aqui tiene que ir el % if login como admin o usuario %-->
+                    
                     <li class="nav-item"><a href="/pintores" class="nav-link link-light">Miembros</a></li>
-                    <li class="nav-item"><a href="/crear-pintor" class="nav-link link-light">Crear Miembro</a></li>
-                        -->
+                    
+                    {% if request.session.usuarioTipo == 'admin' %}
+                        <li class="nav-item"><a href="/registro" class="nav-link link-light">Crear Miembro</a></li>
+                    {% endif %}
                     <div id ="search">
                       <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
@@ -47,14 +58,7 @@
         </div>
     </div>
 
-    <div class="container">
-        <ul class="nav bg-dark">
-            <li class="nav-item"><a href="/" class="nav-link link-light">Home</a></li>
-  
 
-        </ul>
-
-    </div>
 
 
     {% block contenido %}

@@ -9,6 +9,8 @@ class Pintor(models.Model):
   email = models.EmailField(max_length=50)
   phone = models.IntegerField(null=True)
   joined_date = models.DateField(null=True)
+  password = models.CharField(max_length=8)
+  tipoUsuario = models.CharField(max_length=15)
 
 
 

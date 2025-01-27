@@ -1,0 +1,24 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+    Login
+{% endblock %}    
+
+
+
+{% block contenido %}
+   
+
+    <main class="container">
+        <h1>Formulario para inciar sesion</h1>
+        <div class="container mb-3 py-3">
+            <form method="get">
+                {{form.as_p}}
+                <button type="submit">Login</button>
+            </form>
+        </div>    
+        
+    </main>
+
+
+{% endblock %}

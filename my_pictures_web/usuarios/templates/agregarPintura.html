@@ -9,13 +9,13 @@
 <header class="bg-dark text-white py-3 d-xs-12 d-md-6 d-sm-6 ">
     <div class="container d-flex justify-content-between align-items-center">
       <div>
-        <a href="index.html"><img src="assets\img\logo.png" class="@media d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
+        <a href="/"><img src="assets\img\logo.png" class="@media d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
 
       </div>
         <h1 class="h3">Colección de pinturas</h1>
         <nav>
             <ul id="navbar" class="nav nav-xs-12 nav-md-6 nav-sm-6">
-                <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="planillaPinturasDina.html">Pinturas</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
                 <li id="registro" class="nav-item"><a class="nav-link text-white" href="re.html">Registro</a></li>
@@ -61,40 +61,9 @@
         <div class="container">
                 
             <h2 class="text-center text-primary mb-4">Subir pintura</h2>
-            <form method="post" class="needs-validation" id="formPinturas">
-                {% csrf_token %}
-                <div class="mb-3">
-            
-                    <label for="nombrePintura" class="form-label">Nombre de la pintura:</label>
-                    <input type="text" class="form-control" id="nombrePintura" name="nombrePintura" placeholder="Ingrese nombre de la pintura" required minlength="3">
-                </div>
-
-                <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción sobre pintura:</label>
-                    <textarea type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripción" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label for="precio" class="form-label">Precio:</label>
-                    <input type="numbre" class="form-control" id="precio" name="precio" placeholder="Precio" required>
-                </div>
-
-                <div class="mb-3 ">
-                    <label for="autor" class="form-label">Tecnica:</label>
-                    <select id="tecnica" name="tecnica" placeholder="Tecnica usada" for="tecnica" class="form-select"required>Tecnica usada:
-                        <option value="oleo">Oleo</option>
-                        <option value="acuarela">Acuarela</option>
-                        <option value="Gouache">Gouache</option>
-                        <option value="acrilica">Acrílica</option>
-
-                    </select>
-         
-                </div>
-                <div class="mb-3">
-                    <label for="fomrFile" class="form-label">Subir pintura:</label>
-                    <input type="file" accept=".jpeg,.png,.jpg" class="form-control" id="imagen" name="imagen" placeholder="Suba la pintura" required>
-                </div>
-
+            <form method="get" class="needs-validation" id="formPinturas">
+                <!--{% csrf_token %}-->
+                {{form.as_p}}
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
