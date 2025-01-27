@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Pintor,Pintura
 from .forms import PintorForm, PinturaForm
+from django.views.decorators.csrf import csrf_protect
 # Create your views here.
 
 def main(request):
@@ -63,12 +64,12 @@ def detallePintura(request, id):
     }
     return HttpResponse(template.render(context,request))
 
-
+@csrf_protect
 def crear_pintura(request):
    template = loader.get_template("agregarPintura.html")
    
-   if request.method=="GET":
-        form = PinturaForm(request.GET)
+   if request.method=="POST":
+        form = PinturaForm(request.POST)
         if form.is_valid():
            nombre = form.cleaned_data['nombre']
            descripcion = form.cleaned_data['descripcion']
@@ -94,4 +95,13 @@ def crear_pintura(request):
       form = PinturaForm()
       context = {'form': form}
 
+      return HttpResponse(template.render(context,request))
+   
+
+def planillaPinturas(request):
+      pintura = Pintura.objects.all().values()
+      template = loader.get_template('planillaPinturasDina.html')
+      context ={
+            'pintura':pintura
+         }
       return HttpResponse(template.render(context,request))

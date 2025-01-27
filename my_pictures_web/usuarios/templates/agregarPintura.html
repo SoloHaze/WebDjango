@@ -59,8 +59,12 @@
 
     <section class="py-5 bg-light">
         <div class="container">
+                
             <h2 class="text-center text-primary mb-4">Subir pintura</h2>
-            <form method="post" class="needs-validation" id="formPinturas"> <div class="mb-3">
+            <form method="post" class="needs-validation" id="formPinturas">
+                {% csrf_token %}
+                <div class="mb-3">
+            
                     <label for="nombrePintura" class="form-label">Nombre de la pintura:</label>
                     <input type="text" class="form-control" id="nombrePintura" name="nombrePintura" placeholder="Ingrese nombre de la pintura" required minlength="3">
                 </div>
