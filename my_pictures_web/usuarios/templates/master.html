@@ -36,7 +36,7 @@
                     {% if request.session.usuario_id %}
                         <li id="login" class="nav-item"><a class="nav-link text-white" href="/logout">Log Out</a></li>
                     {% else  %}
-                        <li id="registro" class="nav-item"><a class="nav-link text-white" href="/crear-pintor">Registro</a></li>
+                        <li id="registro" class="nav-item"><a class="nav-link text-white" href="/registro">Registro</a></li>
                         <li id="login" class="nav-item"><a class="nav-link text-white" href="/loginn">Log In</a></li>
                     {% endif %}                    
                         <!--Aqui tiene que ir el % if login como admin o usuario %-->
@@ -44,7 +44,7 @@
                     <li class="nav-item"><a href="/pintores" class="nav-link link-light">Miembros</a></li>
                     
                     {% if request.session.usuarioTipo == 'admin' %}
-                        <li class="nav-item"><a href="/registro" class="nav-link link-light">Crear Miembro</a></li>
+                        <li class="nav-item"><a href="/crear-pintor" class="nav-link link-light">Crear Miembro</a></li>
                     {% endif %}
                     <div id ="search">
                       <form class="d-flex" role="search">
@@ -58,10 +58,19 @@
         </div>
     </div>
 
+    {% for item in pintura %}
+        <img src="{{ item.imagen.url }}" alt="Imagen de la pintura">
+    {% endfor %}
+
 
 
 
     {% block contenido %}
+
+
+
+
+
     {% endblock %}
 
     

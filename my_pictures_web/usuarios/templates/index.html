@@ -1,13 +1,37 @@
 {% extends "master.html" %}
 
 {% block titulo %}
-    club tenis
+    Coleccion de pinturas
 {% endblock %}
 
 {% block contenido %}
 <h1 class="bg-info">Coleccion de pinturas</h1> 
 
+
 <p>El valor del dolar es: {{dolar}}</p>
 
+<div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for p in pintura %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ pintura.imagen.url }}" class="d-block w-100" alt="{{ pintura.nombre }}">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ pintura.nombre }}</h5>
+            <p>{{ pintura.descripcion }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+ 
 
 {% endblock %}

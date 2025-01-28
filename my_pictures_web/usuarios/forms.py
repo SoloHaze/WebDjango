@@ -5,7 +5,6 @@ class PintorForm(forms.Form):
     lastname = forms.CharField(max_length=50)
     email = forms.CharField(max_length=50)
     phone = forms.IntegerField()
-    joined_date = forms.DateField()
     password = forms.CharField(max_length=8)
     repeatPass = forms.CharField()
     
@@ -16,7 +15,7 @@ class PinturaForm(forms.Form):
     descripcion = forms.CharField(max_length=500)
     precio = forms.IntegerField()
     tecnicaUsada = forms.CharField(max_length=20)
-    imagen = forms.FileField(required=False)
+    imagen = forms.ImageField(required=False)
 
 
 class LoginForm(forms.Form):
@@ -29,7 +28,6 @@ class RegistroForm(forms.Form):
     lastname = forms.CharField(max_length=50)
     email = forms.CharField(max_length=50)
     phone = forms.IntegerField()
-    joined_date = forms.DateField()
     password = forms.CharField(max_length=8)
     repeatPass = forms.CharField()
     tipoUsuario= forms.CharField(max_length=20)

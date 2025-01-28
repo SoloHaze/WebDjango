@@ -51,7 +51,7 @@ def crear_pintor(request):
             lastname = form.cleaned_data['lastname']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
-            joined_date = form.cleaned_data['joined_date']
+            joined_date = date.today()
             password = form.cleaned_data['password']
             repeatPass = form.cleaned_data['repeatPass']
             tipoUsuario = "pintor"
@@ -125,7 +125,7 @@ def planillaPinturas(request):
       pintura = Pintura.objects.all().values()
       template = loader.get_template('planillaPinturasDina.html')
       context ={
-            'pintura':pintura
+            'pintura': pintura
          }
       return HttpResponse(template.render(context,request))
 
@@ -140,7 +140,7 @@ def registro(request):
             lastname = form.cleaned_data['lastname']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
-            joined_date = form.cleaned_data['joined_date']
+            joined_date = date.today()
             password = form.cleaned_data['password']
             repeatPass = form.cleaned_data['repeatPass']
             tipoUsuario = form.cleaned_data['tipoUsuario']

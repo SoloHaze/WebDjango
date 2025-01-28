@@ -61,7 +61,7 @@
         <div class="container">
                 
             <h2 class="text-center text-primary mb-4">Subir pintura</h2>
-            <form method="get" class="needs-validation" id="formPinturas">
+            <form method="get" class="needs-validation" id="formPinturas"  enctype="multipart/form-data">
                 <!--{% csrf_token %}-->
                 {{form.as_p}}
                 <div class="d-grid">

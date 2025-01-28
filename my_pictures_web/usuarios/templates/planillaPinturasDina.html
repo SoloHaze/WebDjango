@@ -10,8 +10,35 @@
 
     <main id="principal"></main>
 
-  
-   
+      <!-- Contenedor principal para las pinturas -->
+      <div class="container my-5">
+        <div class="row">
+            {% for p in pintura %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if pintura.imagen %}
+                            <img src="{{ pintura.imagen.url }}" class="card-img-top" alt="{{ pintura.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Imagen no disponible">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pintura.nombre }}</h5>
+                            <p class="card-text">{{ pintura.descripcion }}</p>
+                            <p class="card-text"><strong>Precio:</strong> ${{ pintura.precio }}</p>
+                            <p class="card-text"><strong>Autor:</strong> {{ pintura.autor }}</p>
+                            <p class="card-text"><strong>Técnica usada:</strong> {{ pintura.tecnica_usada }}</p>
+                            <p class="card-text"><strong>Fecha de subida:</strong> {{ pintura.fechaSubida }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No hay pinturas disponibles.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    
 
     <footer class="bg-primary text-white text-center py-3">
         <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
