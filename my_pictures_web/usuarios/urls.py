@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
+
 urlpatterns = [
     path('', views.main,name="main"),
     path('pintores/', views.pintores, name="pintores" ),
@@ -15,6 +16,6 @@ urlpatterns = [
     path('login', views.login, name="login" ),
     path('loginn', views.loginn, name="loginn" ),
     path('logout', views.logout, name="logout" ),
+    path('contacto', views.contacto, name="contacto" ),
     path('registro', views.registro, name="registro" )
-    
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

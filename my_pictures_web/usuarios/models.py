@@ -13,6 +13,11 @@ class Pintor(models.Model):
   tipoUsuario = models.CharField(max_length=15)
 
 
+class Contacto(models.Model):
+   nombre= models.CharField(max_length=50)
+   email = models.EmailField()
+   mensaje = models.CharField(max_length=3000)
+
 
 class Pintura(models.Model):
     nombre= models.CharField(max_length=30)
@@ -23,3 +28,6 @@ class Pintura(models.Model):
     fechaSubida = models.DateField()
     estado = models.CharField(max_length=10)
     imagen = models.ImageField(upload_to='img/', null=True, blank=True)
+
+    def __str__(self):
+       return self.nombre

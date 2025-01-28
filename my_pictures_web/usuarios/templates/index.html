@@ -10,28 +10,58 @@
 
 <p>El valor del dolar es: {{dolar}}</p>
 
-<div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5" data-bs-ride="carousel">
+<div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5 nav nav-xs-12 nav-md-6 nav-sm-6" data-bs-ride="carousel">
     <div class="carousel-inner">
-      {% for p in pintura %}
+      {% for p in pinturas %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-          <img src="{{ pintura.imagen.url }}" class="d-block w-100" alt="{{ pintura.nombre }}">
+          <img src="{{ p.imagen.url }}" class="d-block w-100" alt="{{ p.nombre }}">
           <div class="carousel-caption d-none d-md-block">
-            <h5>{{ pintura.nombre }}</h5>
-            <p>{{ pintura.descripcion }}</p>
+            <h5>{{ p.nombre }}</h5>
+            <p>{{ p.descripcion }}</p>
           </div>
         </div>
       {% endfor %}
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
   
- 
+  {% for item in pintores %}
+  {{ item.nombre }}
+    
+  {% endfor %}
+
+
+
+  <div class="container my-5">
+    <div class="row">
+        {% for p in pinturas %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                   {% if p.imagen %}
+                    <img src="{{ p.imagen.url }}" class="card-img-top" alt="{{ p.nombre }}">
+                    {%endif%}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.nombre }}</h5>
+                        <p class="card-text">{{ p.descripcion }}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{ p.precio }}</p>
+                        <p class="card-text"><strong>Autor:</strong> {{ p.autor }}</p>
+                        <p class="card-text"><strong>Técnica usada:</strong> {{ p.tecnicaUsada }}</p>
+                        <p class="card-text"><strong>Fecha de subida:</strong> {{ p.fechaSubida }}</p>
+
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay pinturas disponibles.</p>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

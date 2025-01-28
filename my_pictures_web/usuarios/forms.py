@@ -1,4 +1,6 @@
 from django import forms
+from .models import Pintura, Contacto
+
 
 class PintorForm(forms.Form):
     firstname = forms.CharField(max_length=50,min_length=3)
@@ -9,13 +11,15 @@ class PintorForm(forms.Form):
     repeatPass = forms.CharField()
     
 
+class ContactoForm(forms.Form):
+    class Meta:
+        model = Contacto
+        fields = ['nombre','email','mensaje']
 
-class PinturaForm(forms.Form):
-    nombre= forms.CharField(max_length=30)
-    descripcion = forms.CharField(max_length=500)
-    precio = forms.IntegerField()
-    tecnicaUsada = forms.CharField(max_length=20)
-    imagen = forms.ImageField(required=False)
+class PinturaForm(forms.ModelForm):
+    class Meta:
+        model = Pintura
+        fields = ['nombre','descripcion','precio','autor','tecnicaUsada','fechaSubida','estado','imagen']
 
 
 class LoginForm(forms.Form):

@@ -19,15 +19,15 @@
     <div class="bg-dark text-white py-3 d-xs-12 d-md-6 d-sm-6 ">
         <div class="container d-flex justify-content-between align-items-center">
           <div>
-            <a href="index.html"><img src="\assets\img\logo.png" class="@media d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
+            <a href="/" ><img src="/media/logo.png" class="d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
     
           </div>
             <h1 class="h3">Colección de pinturas</h1>
-            <nav>
+            <nav class="nav nav-xs-12 nav-md-6 nav-sm-6">
                 <ul id="navbar" class="nav nav-xs-12 nav-md-6 nav-sm-6">
                     <li class="nav-item"><a class="nav-link text-white" href="/">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/planillaPinturasDina">Pinturas</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contacto">Contacto</a></li>
 
                     {% if request.session.usuarioTipo == 'pintor' %}
                         <li class="nav-item"><a href="/crear-pintura" class="nav-link link-light">Subir Pintura</a></li>
@@ -58,9 +58,6 @@
         </div>
     </div>
 
-    {% for item in pintura %}
-        <img src="{{ item.imagen.url }}" alt="Imagen de la pintura">
-    {% endfor %}
 
 
 
@@ -70,9 +67,13 @@
 
 
 
+  
+
 
     {% endblock %}
-
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
+    </footer>
     
 </body>
 </html>

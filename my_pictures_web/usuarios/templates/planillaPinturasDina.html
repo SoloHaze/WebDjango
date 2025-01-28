@@ -8,44 +8,42 @@
  
 
 
-    <main id="principal"></main>
+    <main id="principal">
 
-      <!-- Contenedor principal para las pinturas -->
-      <div class="container my-5">
-        <div class="row">
-            {% for p in pintura %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        {% if pintura.imagen %}
-                            <img src="{{ pintura.imagen.url }}" class="card-img-top" alt="{{ pintura.nombre }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Imagen no disponible">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ pintura.nombre }}</h5>
-                            <p class="card-text">{{ pintura.descripcion }}</p>
-                            <p class="card-text"><strong>Precio:</strong> ${{ pintura.precio }}</p>
-                            <p class="card-text"><strong>Autor:</strong> {{ pintura.autor }}</p>
-                            <p class="card-text"><strong>Técnica usada:</strong> {{ pintura.tecnica_usada }}</p>
-                            <p class="card-text"><strong>Fecha de subida:</strong> {{ pintura.fechaSubida }}</p>
+        <!--<img src="/media/img/nocheEstrellada.png" class="card-img-top" alt="lala">-->
 
+        <!-- Contenedor principal para las pinturas -->
+        <div class="container my-5">
+            <div class="row">
+                {% for p in pinturas %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                           {% if p.imagen %}
+                            <img src="{{ p.imagen.url }}" class="card-img-top" alt="{{ p.nombre }}">
+                            {%endif%}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ p.nombre }}</h5>
+                                <p class="card-text">{{ p.descripcion }}</p>
+                                <p class="card-text"><strong>Precio:</strong> ${{ p.precio }}</p>
+                                <p class="card-text"><strong>Autor:</strong> {{ p.autor }}</p>
+                                <p class="card-text"><strong>Técnica usada:</strong> {{ p.tecnicaUsada }}</p>
+                                <p class="card-text"><strong>Fecha de subida:</strong> {{ p.fechaSubida }}</p>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% empty %}
-                <p>No hay pinturas disponibles.</p>
-            {% endfor %}
+                {% empty %}
+                    <p>No hay pinturas disponibles.</p>
+                {% endfor %}
+            </div>
         </div>
-    </div>
 
-    
+    </main>
 
-    <footer class="bg-primary text-white text-center py-3">
+    <footer class="bg-dark text-white text-center py-3">
         <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
     </footer>
 
     
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/consumo-api.js"></script>
 
 {% endblock %}

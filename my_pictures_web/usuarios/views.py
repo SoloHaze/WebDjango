@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Pintor,Pintura
-from .forms import PintorForm, PinturaForm, LoginForm, RegistroForm
+from .models import Pintor,Pintura, Contacto
+from .forms import PintorForm, PinturaForm, LoginForm, RegistroForm, ContactoForm
 from django.views.decorators.csrf import csrf_protect
 from datetime import date
 # Create your views here.
@@ -21,7 +21,8 @@ import requests
 def main(request):
    r = requests.get('https://mindicador.cl/api')
    valor_dolar= r.json()['dolar']['valor']
-   return render  (request,'index.html',{'request': request, 'dolar': valor_dolar})
+   pinturas = Pintura.objects.all()
+   return render(request,'index.html',{'request': request, 'dolar': valor_dolar, 'pinturas': pinturas})
 
 def pintores(request):
   pintores = Pintor.objects.all().values()
@@ -30,6 +31,25 @@ def pintores(request):
     'pintores': pintores,
   }
   return HttpResponse(template.render(context, request))
+
+
+def contacto(request):
+    template = loader.get_template('contacto.html')
+    if request.method=="GET":
+            form = ContactoForm(request.GET)
+            if form.is_valid():
+                nombre = form.cleaned_data['nombre']
+                email = form.cleaned_data['email']
+                mensaje = form.cleaned_data['mensaje']
+                contacto = Contacto(nombre = nombre, email= email, mensaje=mensaje)
+                contacto.save()
+                return redirect('contacto') 
+            else:
+                form = RegistroForm()
+                context = {'form': form}        
+            return HttpResponse(template.render(context,request))            
+                               
+    return HttpResponse(template.render(context,request))
 
 
 def detalles(request, id):
@@ -89,45 +109,23 @@ def detallePintura(request, id):
 
 @requiere_usuario('pintor')
 def crear_pintura(request):
-   template = loader.get_template("agregarPintura.html")
-   
-   if request.method=="GET":
-        form = PinturaForm(request.GET)
+   if request.method=="POST":
+        form = PinturaForm(request.POST, request.FILES)
         if form.is_valid():
-           nombre = form.cleaned_data['nombre']
-           descripcion = form.cleaned_data['descripcion']
-           precio = form.cleaned_data['precio']
-           autor = request.session['usuarioFirstName']
-           tecnicaUsada = form.cleaned_data['tecnicaUsada']
-           fechaSubida = date.today()
-           estado = 'en espera'
-           imagen = form.cleaned_data['imagen']
-
-
-           pintura = Pintura(nombre=nombre, descripcion=descripcion, precio=precio,autor= autor, tecnicaUsada=tecnicaUsada, fechaSubida=fechaSubida, estado= estado, imagen= imagen)
-           pintura.save()
-           
+           form.save()
            return redirect('planillaPinturasDina')
-        else:
-           form = PinturaForm()
-           context = {'form': form}
-           return HttpResponse(template.render(context,request))
    else:
-
-
       form = PinturaForm()
-      context = {'form': form}
-
-      return HttpResponse(template.render(context,request))
+   return render(request, 'agregarPintura.html', {'form': form})
    
 
 def planillaPinturas(request):
-      pintura = Pintura.objects.all().values()
-      template = loader.get_template('planillaPinturasDina.html')
-      context ={
-            'pintura': pintura
-         }
-      return HttpResponse(template.render(context,request))
+      pinturas = Pintura.objects.all()
+      #template = loader.get_template('planillaPinturasDina.html')
+      #context ={
+      #      'pinturas': pinturas
+      #   }
+      return render(request, 'planillaPinturasDina.html', {'pinturas': pinturas})
 
 
 def registro(request):
