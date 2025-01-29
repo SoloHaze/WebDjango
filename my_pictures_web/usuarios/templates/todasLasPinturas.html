@@ -16,7 +16,7 @@
         <ul><!--Todas las pinturas-->
             {% for m in pinturas %}
 
-                {% if  m.firstname == "aprobado"  %}<!-- Aqui va el m.estado == "aprobado"--><!-- Esto hace que se filtre por las aprobadas nomas-->
+                {% if  m.estado == "aprobado"  %}<!-- Aqui va el m.estado == "aprobado"--><!-- Esto hace que se filtre por las aprobadas nomas-->
                 <li> <a href="detalles/{{m.id}}">{{m.id}}</a> {{ m.firstname }} {{ m.lastname }} {{ m.phone }} {{ m.joined_date }} </li>
                 {% endif %}
             {% endfor %}

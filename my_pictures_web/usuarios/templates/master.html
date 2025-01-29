@@ -22,7 +22,8 @@
             <a href="/" ><img src="/media/logo.png" class="d-xs-12 d-md-6 d-sm-6 py-3 margin-left"></a>
     
           </div>
-            <h1 class="h3">Colección de pinturas</h1>
+
+            <h1 class="h1 text-center h1-xs-12 h1-md-6 h1-sm-6">Colección de pinturas</h1>
             <nav class="nav nav-xs-12 nav-md-6 nav-sm-6">
                 <ul id="navbar" class="nav nav-xs-12 nav-md-6 nav-sm-6">
                     <li class="nav-item"><a class="nav-link text-white" href="/">Inicio</a></li>
@@ -45,6 +46,7 @@
                     
                     {% if request.session.usuarioTipo == 'admin' %}
                         <li class="nav-item"><a href="/registro" class="nav-link link-light">Crear Miembro</a></li>
+                        <li class="nav-item"><a href="/planillaPinturasAdmin" class="nav-link link-light">Estado de Pinturas</a></li>
                     {% endif %}
                     <div id ="search">
                       <form class="d-flex" role="search">
@@ -72,7 +74,7 @@
 
     {% endblock %}
     <footer class="bg-dark text-white text-center py-3">
-        <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
+        <p class="mb-0">&copy; Colección  y venta de Pinturas. Todos los derechos reservados.</p>
     </footer>
     
 </body>

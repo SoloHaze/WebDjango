@@ -16,10 +16,11 @@
         <div class="container my-5">
             <div class="row">
                 {% for p in pinturas %}
+                    {% if p.estado == "aprobado" %}
                     <div class="col-md-4 mb-4">
                         <div class="card">
                            {% if p.imagen %}
-                            <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}">
+                            <a href="detallePintura/{{p.id}}"> <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}"></a>
                             {%endif%}
                             <div class="card-body">
                                 <h5 class="card-title">{{ p.nombre }}</h5>
@@ -32,6 +33,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 {% empty %}
                     <p>No hay pinturas disponibles.</p>
                 {% endfor %}

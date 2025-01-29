@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido %}
-<h1 class="bg-info">Coleccion de pinturas</h1> 
+<h1 class="bg-info text-center center-block">Coleccion de pinturas</h1> 
 
 
 <p>El valor del dolar es: {{dolar}}</p>
@@ -13,8 +13,8 @@
 <div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5 nav nav-xs-12 nav-md-6 nav-sm-6 w" data-bs-ride="carousel" width="20px " height="20px">
     <div class="carousel-inner" >
       {% for p in pinturas %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}" >
-          <img src="{{ p.imagen.url }}" class="d-block w-100" alt="{{ p.nombre }}">
+        <div class="carousel-item carousel-item-center {% if forloop.first %}active{% endif %}" >
+          <a href="detallePintura/{{p.id}}"> <img src="{{ p.imagen.url }}" class="d-block w-50 mx-auto " alt="{{ p.nombre }}"></a>
           <div class="carousel-caption  d-md-6 d-sm-6 d-xs-12">
             <h5>{{ p.nombre }}</h5>
             <p>{{ p.descripcion }}</p>
@@ -31,11 +31,10 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  
-  {% for item in pintores %}
-  {{ item.nombre }}
-    
-  {% endfor %}
+  <h3>Numero de pinturas subidas: {{pinturas.count}} 
+  </h3>
+
+ 
 
 
 
@@ -45,7 +44,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                    {% if p.imagen %}
-                    <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}">
+                   <a href="detallePintura/{{p.id}}"><img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}"></a>
                     {%endif%}
                     <div class="card-body">
                         <h5 class="card-title">{{ p.nombre }}</h5>

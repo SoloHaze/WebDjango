@@ -18,7 +18,7 @@ Pagina web diseñada especialmente para brindar comodidad y seguridad al comprar
 
 * Para descargar el repositorio en GitHub, de la pagina oficial el comando es
 ```Json
- https://github.com/SoloHaze/proyecto-clase.git
+ https://github.com/SoloHaze/webDjango.git
 ```
 
 * posteriormente al descargar en su dispositivo local, abrir mediante la carpeta donde se ejecutó el comando o ejecutar el comando desde un IDE, ya sea IntelliJ, VsCode o NetBeans, o cualquier otro.
@@ -34,7 +34,6 @@ Para mas informacion o ayuda necesaria, contactar con SoloHaze, creador de el pr
 Nombres de colaboradores  
 
 SoloHaze    
-[@SoloHazeLinkedIn](https://www.linkedin.com/in/aron-acevedo-navarrete-096701142/?originalSubdomain=cl)  
 
 ## Historial
 

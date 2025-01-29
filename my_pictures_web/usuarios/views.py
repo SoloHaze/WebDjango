@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from .models import Pintor,Pintura, Contacto
 from .forms import PintorForm, PinturaForm, LoginForm, RegistroForm, ContactoForm
-from django.views.decorators.csrf import csrf_protect
 from datetime import date
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
@@ -105,11 +104,8 @@ def crear_pintor(request):
    
 def detallePintura(request, id):
     pintura = Pintura.objects.get(id=id)
-    template = loader.get_template('detallePintura.html')
-    context ={
-       'pintura':pintura
-    }
-    return HttpResponse(template.render(context,request))
+
+    return render(request,'detallePintura.html',{'pintura': pintura})
 
 @requiere_usuario('pintor')
 def pinturasPintor(request):
@@ -128,6 +124,10 @@ def crear_pintura(request):
       form = PinturaForm()
    return render(request, 'agregarPintura.html', {'form': form})
    
+def get_total(self):
+    return Pintura.objects.count()
+    
+
 
 def planillaPinturas(request):
       pinturas = Pintura.objects.all()
@@ -273,32 +273,26 @@ def logout(request):
    return redirect('main')
 
 @requiere_usuario('admin')
-def actualizar_estado(request, id):
-    # Verificamos si el usuario es un administrador
-    if request.user.tipoUsuario != "admin":
-        return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
-
-    # Recuperamos la pintura
-    pintura = Pintura.objects.get(id=id)
+def lista_pinturas(request):
+    # Obtener todas las pinturas
+    pinturas = Pintura.objects.all()
 
     if request.method == 'POST':
-        razon = request.POST.get('razon', '')
-        accion = request.POST.get('accion')
+        # Si el formulario es enviado, obtener la pintura y cambiar su estado
+        pintura_id = request.POST.get('pintura_id')
+        estado = request.POST.get('estado')
+
+        pintura = get_object_or_404(Pintura, id=pintura_id)
+        if estado in ['aprobado', 'reprobado']:
+            pintura.estado = estado
+            pintura.save()
         
-        # Si la acción es aprobar
-        if accion == 'aprobar':
-            pintura.aprobado = True
-        # Si la acción es rechazar
-        elif accion == 'rechazar':
-            pintura.aprobado = False
+        return redirect('planillaPinturasAdmin')  # Redirigir a la misma página para mostrar los cambios
 
-        # Guardamos la razón proporcionada por el admin
-        pintura.razon = razon
-        pintura.save()
+    return render(request, 'planillaPinturasAdmin.html', {'pinturas': pinturas})
 
-        # Mensaje de éxito
-        messages.success(request, f'Pintura {accion}da correctamente.')
 
-        return redirect('planillaPinturasAdmin')
 
-    return redirect('planillaPinturasAdmin')
+
+
+    

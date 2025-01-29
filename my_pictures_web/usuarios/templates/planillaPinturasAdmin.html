@@ -1,0 +1,58 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+    Pinturas
+{% endblock %}
+{% block contenido %}
+<body>
+ 
+
+
+    <main id="principal">
+
+        <!--<img src="/media/img/nocheEstrellada.png" class="card-img-top" alt="lala">-->
+
+        <!-- Contenedor principal para las pinturas -->
+        <div class="container my-5">
+            <div class="row">
+                {% for p in pinturas %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            {% if p.imagen %}
+                                <a href="detallePintura/{{p.id}}"> 
+                                    <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}">
+                                </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ p.nombre }}</h5>
+                                <p class="card-text">{{ p.descripcion }}</p>
+                                <p class="card-text"><strong>Precio:</strong> ${{ p.precio }}</p>
+                                <p class="card-text"><strong>Autor:</strong> {{ p.autor }}</p>
+                                <p class="card-text"><strong>Técnica usada:</strong> {{ p.tecnicaUsada }}</p>
+                                <p class="card-text"><strong>Fecha de subida:</strong> {{ p.fechaSubida }}</p>
+                                <p class="card-text"><strong>Estado:</strong> {{ p.estado }}</p>
+                                
+                                <!-- Mostrar los botones para cambiar el estado -->
+                                <form method="POST" action="{% url 'planillaPinturasAdmin' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="pintura_id" value="{{ p.id }}">
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" name="estado" value="aprobado" class="btn btn-success">Aprobar</button>
+                                        <button type="submit" name="estado" value="reprobado" class="btn btn-danger">Reprobar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No hay pinturas disponibles.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+
+
+    
+
+{% endblock %}
