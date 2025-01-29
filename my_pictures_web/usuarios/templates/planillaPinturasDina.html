@@ -19,7 +19,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card">
                            {% if p.imagen %}
-                            <img src="{{ p.imagen.url }}" class="card-img-top" alt="{{ p.nombre }}">
+                            <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}">
                             {%endif%}
                             <div class="card-body">
                                 <h5 class="card-title">{{ p.nombre }}</h5>
@@ -40,9 +40,6 @@
 
     </main>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p class="mb-0">&copy; Venta de Pinturas. Todos los derechos reservados.</p>
-    </footer>
 
     
 

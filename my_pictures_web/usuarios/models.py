@@ -10,7 +10,8 @@ class Pintor(models.Model):
   phone = models.IntegerField(null=True)
   joined_date = models.DateField(null=True)
   password = models.CharField(max_length=8)
-  tipoUsuario = models.CharField(max_length=15)
+  tipoUsuario = models.CharField(max_length=20, choices=[('admin', 'Admin'), ('pintor', 'pintor')], default='pintor')
+
 
 
 class Contacto(models.Model):

@@ -10,12 +10,12 @@
 
 <p>El valor del dolar es: {{dolar}}</p>
 
-<div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5 nav nav-xs-12 nav-md-6 nav-sm-6" data-bs-ride="carousel">
-    <div class="carousel-inner">
+<div id="carouselExampleDark" class="carousel  carousel-dark slide mb-5 py-5 nav nav-xs-12 nav-md-6 nav-sm-6 w" data-bs-ride="carousel" width="20px " height="20px">
+    <div class="carousel-inner" >
       {% for p in pinturas %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="carousel-item {% if forloop.first %}active{% endif %}" >
           <img src="{{ p.imagen.url }}" class="d-block w-100" alt="{{ p.nombre }}">
-          <div class="carousel-caption d-none d-md-block">
+          <div class="carousel-caption  d-md-6 d-sm-6 d-xs-12">
             <h5>{{ p.nombre }}</h5>
             <p>{{ p.descripcion }}</p>
           </div>
@@ -45,7 +45,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                    {% if p.imagen %}
-                    <img src="{{ p.imagen.url }}" class="card-img-top" alt="{{ p.nombre }}">
+                    <img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}">
                     {%endif%}
                     <div class="card-body">
                         <h5 class="card-title">{{ p.nombre }}</h5>

@@ -199,3 +199,16 @@ responsivo: se adapta al dispositivo.*/
 @media (min-width:1281px) { 
     /* hi-res laptops and desktops */ 
 }
+
+
+#carouselExampleDark {
+    width: 100px; /* O el tamaño que desees */
+    height: 100px; /* Ajusta también la altura si lo necesitas */
+  }
+  
+  /* Ajustar el tamaño de las imágenes dentro del carrusel */
+  #carouselExampleDark .carousel-item img {
+    width: 100px; /* O el tamaño que desees */
+    height: 100px; /* Ajusta también la altura */
+    object-fit: cover; /* Mantener la proporción de la imagen */
+  }

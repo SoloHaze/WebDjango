@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from .models import Pintor,Pintura, Contacto
 from .forms import PintorForm, PinturaForm, LoginForm, RegistroForm, ContactoForm
 from django.views.decorators.csrf import csrf_protect
 from datetime import date
+from django.contrib import messages
+from django.contrib.auth.hashers import check_password
+
+
 # Create your views here.
 #decorador validador de rutas:
 def requiere_usuario(tipo_requerido):
@@ -60,7 +64,7 @@ def detalles(request, id):
     }
     return HttpResponse(template.render(context,request))
 
-@requiere_usuario('admin')
+
 def crear_pintor(request):
    template = loader.get_template("formulario-pintores.html")
    
@@ -108,6 +112,12 @@ def detallePintura(request, id):
     return HttpResponse(template.render(context,request))
 
 @requiere_usuario('pintor')
+def pinturasPintor(request):
+    pinturas = Pintura.objects.all()
+
+    return render(request, 'todasLasPinturas.html', {'pinturas': pinturas})    
+
+@requiere_usuario('pintor')
 def crear_pintura(request):
    if request.method=="POST":
         form = PinturaForm(request.POST, request.FILES)
@@ -127,7 +137,11 @@ def planillaPinturas(request):
       #   }
       return render(request, 'planillaPinturasDina.html', {'pinturas': pinturas})
 
+def planillaPinturasAdmin(request):
+    pinturas = Pintura.objects.all()
+    return render(request, 'planillaPinturasDina.html', {'pinturas': pinturas})
 
+@requiere_usuario('admin')
 def registro(request):
    template = loader.get_template("registro.html")
    
@@ -166,12 +180,69 @@ def registro(request):
 
       return HttpResponse(template.render(context,request))
 
+def registroAdmin(request):
+   template = loader.get_template("registro.html")
+   
+   if request.method=="GET":
+        form = RegistroForm(request.GET)
+        if form.is_valid():
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            joined_date = date.today()
+            password = form.cleaned_data['password']
+            repeatPass = form.cleaned_data['repeatPass']
+            tipoUsuario = form.cleaned_data['tipoUsuario']
+            if password!=repeatPass:
+               
+               form = RegistroForm()
+               context = {'form': form}
+               
+               return HttpResponse(template.render(context,request))   
+            else:    
 
-def login(request):
-    template = loader.get_template('login.html')
+               pintor = Pintor(firstname=firstname, lastname=lastname, email=email, phone=phone, joined_date=joined_date,password=repeatPass, tipoUsuario=tipoUsuario)
+               pintor.save()
+               
+               return redirect('loginn')
+        else:
+           form = RegistroForm()
+           context = {'form': form}
+           return HttpResponse(template.render(context,request))
+   else:
+
+
+      form = RegistroForm()
+      context = {'form': form}
+
+      return HttpResponse(template.render(context,request))
+
+
+def loginAdmin(request):
+    template = loader.get_template('loginAdmin.html')
     form = LoginForm()
     context = {'form': form}
-    return HttpResponse(template.render(context,request))
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            correo = form.cleaned_data['email']
+            clave = form.cleaned_data['password']
+            try:
+                usuarioLogueado = Pintor.objects.get(email=correo)
+                if check_password(clave, usuarioLogueado.password):
+                    request.session['usuario_id'] = usuarioLogueado.id
+                    request.session['usuarioTipo'] = usuarioLogueado.tipoUsuario
+                    request.session['usuarioFirstName'] = usuarioLogueado.firstname
+                    return redirect('main')
+                else:
+                    messages.error(request, "La contraseña es incorrecta.")
+            except Pintor.DoesNotExist:
+                messages.error(request, "No se encontró un usuario con ese correo.")
+            except Exception as e:
+                messages.error(request, f"Hubo un error inesperado: {str(e)}")
+
+    return HttpResponse(template.render(context, request))
 
 
 def loginn(request):
@@ -191,6 +262,7 @@ def loginn(request):
                 request.session['usuarioFirstName'] = usuarioLogueado.firstname
                 return redirect('main')
             except:
+
                 #Aqui deberian mostrar un mensaje de error:
                 pass
 
@@ -200,4 +272,33 @@ def logout(request):
    request.session.flush()
    return redirect('main')
 
+@requiere_usuario('admin')
+def actualizar_estado(request, id):
+    # Verificamos si el usuario es un administrador
+    if request.user.tipoUsuario != "admin":
+        return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
 
+    # Recuperamos la pintura
+    pintura = Pintura.objects.get(id=id)
+
+    if request.method == 'POST':
+        razon = request.POST.get('razon', '')
+        accion = request.POST.get('accion')
+        
+        # Si la acción es aprobar
+        if accion == 'aprobar':
+            pintura.aprobado = True
+        # Si la acción es rechazar
+        elif accion == 'rechazar':
+            pintura.aprobado = False
+
+        # Guardamos la razón proporcionada por el admin
+        pintura.razon = razon
+        pintura.save()
+
+        # Mensaje de éxito
+        messages.success(request, f'Pintura {accion}da correctamente.')
+
+        return redirect('planillaPinturasAdmin')
+
+    return redirect('planillaPinturasAdmin')
