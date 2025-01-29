@@ -89,7 +89,7 @@ def crear_pintor(request):
                pintor = Pintor(firstname=firstname, lastname=lastname, email=email, phone=phone, joined_date=joined_date,password=repeatPass, tipoUsuario=tipoUsuario)
                pintor.save()
                
-               return redirect('pintores')
+               return redirect('login')
         else:
            form = PintorForm()
            context = {'form': form}
