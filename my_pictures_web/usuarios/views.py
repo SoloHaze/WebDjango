@@ -37,22 +37,21 @@ def pintores(request):
 
 
 def contacto(request):
-    template = loader.get_template('contacto.html')
-    if request.method=="GET":
-            form = ContactoForm(request.GET)
-            if form.is_valid():
-                nombre = form.cleaned_data['nombre']
-                email = form.cleaned_data['email']
-                mensaje = form.cleaned_data['mensaje']
-                contacto = Contacto(nombre = nombre, email= email, mensaje=mensaje)
-                contacto.save()
-                return redirect('contacto') 
-            else:
-                form = RegistroForm()
-                context = {'form': form}        
-            return HttpResponse(template.render(context,request))            
-                               
-    return HttpResponse(template.render(context,request))
+    if request.method == "GET":
+        form = ContactoForm()  # Crea un formulario vacío si es un GET
+    elif request.method == "POST":
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            mensaje = form.cleaned_data['mensaje']
+            contacto = Contacto(nombre=nombre, email=email, mensaje=mensaje)
+            contacto.save()
+
+            return redirect('contacto')  # O puedes redirigir a otra página después de guardar, como la misma vista
+
+    context = {'form': form}  # Asegúrate de siempre pasar un contexto
+    return render(request, 'contacto.html', context)
 
 
 def detalles(request, id):
@@ -286,8 +285,8 @@ def lista_pinturas(request):
         if estado in ['aprobado', 'reprobado']:
             pintura.estado = estado
             pintura.save()
-        
-        return redirect('planillaPinturasAdmin')  # Redirigir a la misma página para mostrar los cambios
+     
+            return redirect('planillaPinturasAdmin')  # Redirigir a la misma página para mostrar los cambios
 
     return render(request, 'planillaPinturasAdmin.html', {'pinturas': pinturas})
 

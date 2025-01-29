@@ -15,7 +15,7 @@ class Pintor(models.Model):
 
 
 class Contacto(models.Model):
-   nombre= models.CharField(max_length=50)
+   nombre = models.CharField(max_length=50)
    email = models.EmailField()
    mensaje = models.CharField(max_length=3000)
 

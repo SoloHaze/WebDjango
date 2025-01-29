@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido %}
-<h1 class="bg-info text-center center-block">Coleccion de pinturas Ground Zero</h1> 
+<h1 class="bg-secondary text-center center-block">Coleccion de pinturas Ground Zero</h1> 
 
 
 <p>El valor del dolar es: {{dolar}}</p>
@@ -38,11 +38,11 @@
 
 
 
-  <div class="container my-5">
+  <div class="container my-5 ">
     <div class="row">
         {% for p in pinturas %}
             <div class="col-md-4 mb-4">
-                <div class="card">
+                <div class="card bg-secondary">
                    {% if p.imagen %}
                    <a href="detallePintura/{{p.id}}"><img src="{{ p.imagen.url }}" width="250px " height="250px" class="card-img-top" alt="{{ p.nombre }}"></a>
                     {%endif%}
