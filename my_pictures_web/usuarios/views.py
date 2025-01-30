@@ -4,8 +4,7 @@ from django.template import loader
 from .models import Pintor,Pintura, Contacto
 from .forms import PintorForm, PinturaForm, LoginForm, RegistroForm, ContactoForm
 from datetime import date
-from django.contrib import messages
-from django.contrib.auth.hashers import check_password
+
 
 
 # Create your views here.
@@ -27,6 +26,8 @@ def main(request):
    pinturas = Pintura.objects.all()
    return render(request,'index.html',{'request': request, 'dolar': valor_dolar, 'pinturas': pinturas})
 
+
+@requiere_usuario('admin')
 def pintores(request):
   pintores = Pintor.objects.all().values()
   template = loader.get_template('todosLosPintores.html')
@@ -117,8 +118,21 @@ def crear_pintura(request):
    if request.method=="POST":
         form = PinturaForm(request.POST, request.FILES)
         if form.is_valid():
-           form.save()
-           return redirect('planillaPinturasDina')
+               nombre= form.cleaned_data['nombre']
+               descripcion = form.cleaned_data['descripcion']
+               precio = form.cleaned_data['precio']
+               autor = request.session.usuarioFirstName
+               tecnicaUsada = form.cleaned_data['tecnicaUsada']
+               fechaSubida = date.today()
+               estado = "en revision"
+               imagen = form.cleaned_data['imagen']
+            
+               pintura = Pintura(nombre=nombre, descripcion=descripcion, precio=precio, autor=autor, tecnicaUsada=tecnicaUsada,fechaSubida=fechaSubida, estado=estado, imagen=imagen)
+                    
+               pintura.save()
+                
+               form.save()
+               return redirect('planillaPinturasDina')
    else:
       form = PinturaForm()
    return render(request, 'agregarPintura.html', {'form': form})
@@ -178,7 +192,7 @@ def registro(request):
       context = {'form': form}
 
       return HttpResponse(template.render(context,request))
-
+@requiere_usuario('admin')
 def registroAdmin(request):
    template = loader.get_template("registro.html")
    
@@ -218,34 +232,9 @@ def registroAdmin(request):
       return HttpResponse(template.render(context,request))
 
 
-def loginAdmin(request):
-    template = loader.get_template('loginAdmin.html')
-    form = LoginForm()
-    context = {'form': form}
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            correo = form.cleaned_data['email']
-            clave = form.cleaned_data['password']
-            try:
-                usuarioLogueado = Pintor.objects.get(email=correo)
-                if check_password(clave, usuarioLogueado.password):
-                    request.session['usuario_id'] = usuarioLogueado.id
-                    request.session['usuarioTipo'] = usuarioLogueado.tipoUsuario
-                    request.session['usuarioFirstName'] = usuarioLogueado.firstname
-                    return redirect('main')
-                else:
-                    messages.error(request, "La contraseña es incorrecta.")
-            except Pintor.DoesNotExist:
-                messages.error(request, "No se encontró un usuario con ese correo.")
-            except Exception as e:
-                messages.error(request, f"Hubo un error inesperado: {str(e)}")
 
-    return HttpResponse(template.render(context, request))
-
-
-def loginn(request):
-    template = loader.get_template('loginn.html')
+def login(request):
+    template = loader.get_template('login.html')
     form = LoginForm()
     context = {'form': form}
     if request.method=='GET':

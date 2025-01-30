@@ -24,10 +24,10 @@ class Pintura(models.Model):
     nombre= models.CharField(max_length=30)
     descripcion = models.CharField(max_length=500)
     precio = models.IntegerField()
-    autor = models.CharField(max_length=30)
+    autor = models.CharField(max_length=30,null=True)
     tecnicaUsada = models.CharField(max_length=20)
-    fechaSubida = models.DateField()
-    estado = models.CharField(max_length=10)
+    fechaSubida = models.DateField(null=True)
+    estado = models.CharField(max_length=10,null=True)
     imagen = models.ImageField(upload_to='img/', null=True, blank=True)
 
     def __str__(self):

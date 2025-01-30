@@ -14,67 +14,27 @@
 </head>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Razon:</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                                        
-                        <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese Razon" required></textarea>
-    
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Subir Comentario</button>
-                    </div>
-                </div>
-                </div>
-            </div>
 
 
-    <main>
+    <main class="bg-warning">
         
-    <section class="py-5 bg-light">
-        <div class="container">
-                
-            <h2 class="text-center text-primary mb-4 center-block ">Subir pintura</h2>
-            <form method="post" class="needs-validation center-block text-center" id="formPinturas"  enctype="multipart/form-data" >
-                <!--{% csrf_token %}-->
-                {% csrf_token %}
-                {{form.as_p}}
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
+        <section class="py-5 bg-warning">
+            <div class="container bg-warning">
+                    
+                <h2 class="text-center text-primary mb-4 center-block  ">Subir pintura</h2>
+                <form method="post" class="needs-validation center-block text-center" id="formPinturas"  enctype="multipart/form-data" >
+                    <!--{% csrf_token %}-->
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
 
-            </form>
-        </div>
-    </section>        
+                </form>
+            </div>
+        </section>        
     </main>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Razon:</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                                    
-                    <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese Razon" required></textarea>
-
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Subir Comentario</button>
-                </div>
-            </div>
-            </div>
-        </div>
       
     </section>
 

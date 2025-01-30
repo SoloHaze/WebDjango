@@ -7,8 +7,8 @@ class PintorForm(forms.Form):
     lastname = forms.CharField(max_length=50)
     email = forms.CharField(max_length=50)
     phone = forms.IntegerField()
-    password = forms.CharField(max_length=8)
-    repeatPass = forms.CharField()
+    password = forms.CharField(max_length=8,widget=forms.PasswordInput())
+    repeatPass = forms.CharField(widget=forms.PasswordInput())
     
 
 class ContactoForm(forms.ModelForm):
@@ -19,12 +19,12 @@ class ContactoForm(forms.ModelForm):
 class PinturaForm(forms.ModelForm):
     class Meta:
         model = Pintura
-        fields = ['nombre','descripcion','precio','autor','tecnicaUsada','fechaSubida','estado','imagen']
+        fields = ['nombre','descripcion','precio','tecnicaUsada','imagen']
 
 
 class LoginForm(forms.Form):
     email= forms.EmailField()
-    password= forms.CharField(max_length=8)
+    password= forms.CharField(max_length=8,widget=forms.PasswordInput())
 
 
 class RegistroForm(forms.Form):
@@ -32,7 +32,7 @@ class RegistroForm(forms.Form):
     lastname = forms.CharField(max_length=50)
     email = forms.CharField(max_length=50)
     phone = forms.IntegerField()
-    password = forms.CharField(max_length=8)
-    repeatPass = forms.CharField()
+    password = forms.CharField(max_length=8,widget=forms.PasswordInput())
+    repeatPass = forms.CharField(widget=forms.PasswordInput())
     tipoUsuario= forms.CharField(max_length=20)
     
