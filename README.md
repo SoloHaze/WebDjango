@@ -65,11 +65,4 @@ Nombre de el colaborador
 
 SoloHaze    
 
-## Historial
-
-* 0.2
-    * Se agrega Readme.md 
-    * Ver [commit Inicial](https://github.com/SoloHaze/proyecto-clase/commit/9972037818f6b822186374c7453c5eeccd319ba2) o Ver [historial de commits](https://github.com/SoloHaze/proyecto-clase/activity)
-* 0.1
-    *  Version inicial inicio de proyecto
 
