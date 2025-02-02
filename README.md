@@ -4,24 +4,54 @@ Pagina web para vender pinturas y/o colecciones de pinturas.
 
 ## Descripción
 
-Pagina web diseñada especialmente para brindar comodidad y seguridad al comprar una pintura por internet, usando metodos y funciones en JS, y html, brinda opciones multiples de pago con tarjeta, en base a paypal, para más seguridad y confiencialidad.
+Pagina web diseñada especialmente para brindar comodidad y seguridad al comprar una pintura por internet, usando metodos y funciones en python con Django REST framework y html.
 
 ## Empezando
 
 ### Dependencias
 
-* Describe cualquier prerequisito, librerias, OS version, etc., necesitadas antes de instala el programa.
+* Las dependencias necesarias se instalan con el requirements.txt
 * Necesita tener un ordenador conectado a internet, para clonar el repositorio en GitHub.
 
 
 ### Instalación y Ejecución
 
-* Para descargar el repositorio en GitHub, de la pagina oficial el comando es
-```Json
- https://github.com/SoloHaze/webDjango.git
+* Para descargar el repositorio en GitHub, de la pagina oficial:
+
+1. Abrir una linea de comando y ejecutar en una ruta seleccionada:
+```bash
+git clone https://github.com/solohaze/WebDjango.git
 ```
 
-* posteriormente al descargar en su dispositivo local, abrir mediante la carpeta donde se ejecutó el comando o ejecutar el comando desde un IDE, ya sea IntelliJ, VsCode o NetBeans, o cualquier otro.
+2. Entrar en la carpeta el proyecto:
+```bash
+cd WebDjango
+```
+
+3. Crear un ambiente virtual de python:
+```bash
+python -m venv venv
+```
+
+4. Activar el ambiente virtual:
+    Desde Linux/macOS:
+    ```bash
+    source venv/Scripts/activate
+    ```
+    Desde Windows
+    ```bash
+    venv\Scripts\activate
+    ```
+
+5. Instalar las dependencias necesarias para el ambiente virtua:
+```bash
+pip install -r requirements.txt
+```
+
+6. Levantar la aplicación:
+```bash
+python my_pictures_web/manage.py runserver
+```
 
 
 ## Ayuda
@@ -31,7 +61,7 @@ Para mas informacion o ayuda necesaria, contactar con SoloHaze, creador de el pr
 
 ## Colaboradores
 
-Nombres de colaboradores  
+Nombre de el colaborador
 
 SoloHaze    
 

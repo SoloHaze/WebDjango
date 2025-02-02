@@ -16,11 +16,12 @@ class ContactoForm(forms.ModelForm):
         model = Contacto
         fields = ['nombre','email','mensaje']
 
-class PinturaForm(forms.ModelForm):
-    class Meta:
-        model = Pintura
-        fields = ['nombre','descripcion','precio','tecnicaUsada','imagen']
-
+class PinturaForm(forms.Form):
+    nombre= forms.CharField()
+    descripcion = forms.CharField()
+    precio = forms.IntegerField()
+    tecnicaUsada = forms.CharField()
+    imagen = forms.ImageField()   
 
 class LoginForm(forms.Form):
     email= forms.EmailField()

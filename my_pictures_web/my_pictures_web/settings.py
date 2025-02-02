@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Sessions
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+SESSION_COOKIE_NAME = 'session'
+
 # Application definition
 
 INSTALLED_APPS = [

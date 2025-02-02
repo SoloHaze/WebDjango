@@ -32,6 +32,8 @@
                     <li id="registro" class="nav-item"><a class="nav-link text-white" href="/registroAdmin">Registro Admin</a></li>
                     {% if request.session.usuarioTipo == 'pintor' %}
                         <li class="nav-item"><a href="/crear-pintura" class="nav-link link-light">Subir Pintura</a></li>
+                        <li class="nav-item"><a href="/misPinturas" class="nav-link link-light">Mis Pinturas</a></li>
+                        <li class="nav-item"><a href="/misPinturasAprobadas" class="nav-link link-light">Mis Pinturas Aprobadas</a></li>
                     {% endif %}
                     
                     {% if request.session.usuario_id %}
@@ -42,9 +44,9 @@
                     {% endif %}                    
                         <!--Aqui tiene que ir el % if login como admin o usuario %-->
                     
-                    <li class="nav-item"><a href="/pintores" class="nav-link link-light">Miembros</a></li>
-                    
+                        
                     {% if request.session.usuarioTipo == 'admin' %}
+                        <li class="nav-item"><a href="/pintores" class="nav-link link-light">Miembros</a></li>
                         <li class="nav-item"><a href="/registro" class="nav-link link-light">Crear Miembro</a></li>
                         <li class="nav-item"><a href="/planillaPinturasAdmin" class="nav-link link-light">Estado de Pinturas</a></li>
                     {% endif %}

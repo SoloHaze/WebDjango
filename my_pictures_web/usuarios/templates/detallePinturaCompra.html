@@ -1,0 +1,41 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+    Detalle de la pintura
+{% endblock %}
+{% block contenido %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la pintura</title>
+</head>
+<body>
+    <header>
+        <div class="center-block text-center">
+            <h1 class="center-block py-3">{{pintura.nombre}} : {{pintura.autor}}
+            </h1>
+        </div>
+    </header>
+
+
+
+
+    <main><!-- Detalles de cada pintura-->
+        <div class="container center-block text-center img-center">
+            <img src="{{ pintura.imagen.url }}" width="250px " height="250px" class="card-body center-block" alt="{{ p.nombre }}">
+            <div class="container">
+                <p>Descripcion: {{pintura.descripcion}}</p>
+                <p>Autor: {{pintura.autor}}</p>
+                <p>Precio: {{pintura.precio}}</p>
+                <p>Fecha de inscipcion_ {{pintura.fechaSubida}}</p>
+                <p class="card-text"><strong><a href="/"><button class="btn btn-success">Confirmar Compra</button></strong></p></a>
+                
+
+                <p>Volver a <a href="/planillaPinturasDina">Todas la pinturas</a></p>
+
+            </div>
+        </div>
+      
+    </main>
+
+{% endblock %}

@@ -11,6 +11,8 @@ class Pintor(models.Model):
   joined_date = models.DateField(null=True)
   password = models.CharField(max_length=8)
   tipoUsuario = models.CharField(max_length=20, choices=[('admin', 'Admin'), ('pintor', 'pintor')], default='pintor')
+  def __str__(self):
+   return self.firstname  
 
 
 

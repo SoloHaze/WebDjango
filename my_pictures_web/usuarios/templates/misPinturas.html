@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+    Mis Pinturas
+{% endblock %}
+
+{% block contenido %}
+    <header>
+        
+        <h1>Mis Pinturas</h1>
+    </header>
+
+    <main>
+        <ul>
+            {% for pintura in pinturas %}
+                <li>
+                    <img src="{{ pintura.imagen.url }}" alt="{{ pintura.nombre }}" width="50px" height="50px" style="border-radius: 5px;" class="mb-2">
+                    <a href="{% url 'detallePintura' pintura.id %}">{{ pintura.nombre }}</a>
+                    - {{ pintura.tecnicaUsada }} - {{ pintura.precio }} USD
+                    <strong>({{ pintura.estado }})</strong> <!-- Muestra el estado -->
+                </li>
+            {% empty %}
+                <li>No has subido ninguna pintura aún.</li>
+            {% endfor %}
+            <a href="/crear-pintura"><button class="btn btn-success mb-2">Subir Pintura</button></a>
+        </ul>
+
+        <p class="text-center">
+            <a href="/planillaPinturasDina">Volver a todas las pinturas</a>
+        </p>
+    </main>
+{% endblock %}

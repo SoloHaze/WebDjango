@@ -24,7 +24,8 @@ def main(request):
    r = requests.get('https://mindicador.cl/api')
    valor_dolar= r.json()['dolar']['valor']
    pinturas = Pintura.objects.all()
-   return render(request,'index.html',{'request': request, 'dolar': valor_dolar, 'pinturas': pinturas})
+   pintores = Pintor.objects.all()
+   return render(request,'index.html',{'request': request, 'dolar': valor_dolar, 'pinturas': pinturas, 'pintores': pintores})
 
 
 @requiere_usuario('admin')
@@ -113,15 +114,27 @@ def pinturasPintor(request):
 
     return render(request, 'todasLasPinturas.html', {'pinturas': pinturas})    
 
+
+
+
+
 @requiere_usuario('pintor')
 def crear_pintura(request):
    if request.method=="POST":
         form = PinturaForm(request.POST, request.FILES)
         if form.is_valid():
-               nombre= form.cleaned_data['nombre']
+            
+               nombre = form.cleaned_data['nombre']
                descripcion = form.cleaned_data['descripcion']
                precio = form.cleaned_data['precio']
-               autor = request.session.usuarioFirstName
+
+               usuario_id = request.session.get('usuario_id')
+               if usuario_id is None:
+                return redirect('login')
+               usuarioLogueado = Pintor.objects.get(id=usuario_id)
+
+
+               autor = usuarioLogueado.firstname
                tecnicaUsada = form.cleaned_data['tecnicaUsada']
                fechaSubida = date.today()
                estado = "en revision"
@@ -130,8 +143,7 @@ def crear_pintura(request):
                pintura = Pintura(nombre=nombre, descripcion=descripcion, precio=precio, autor=autor, tecnicaUsada=tecnicaUsada,fechaSubida=fechaSubida, estado=estado, imagen=imagen)
                     
                pintura.save()
-                
-               form.save()
+ 
                return redirect('planillaPinturasDina')
    else:
       form = PinturaForm()
@@ -154,7 +166,6 @@ def planillaPinturasAdmin(request):
     pinturas = Pintura.objects.all()
     return render(request, 'planillaPinturasDina.html', {'pinturas': pinturas})
 
-@requiere_usuario('admin')
 def registro(request):
    template = loader.get_template("registro.html")
    
@@ -173,14 +184,13 @@ def registro(request):
                
                form = RegistroForm()
                context = {'form': form}
-               
                return HttpResponse(template.render(context,request))   
             else:    
 
                pintor = Pintor(firstname=firstname, lastname=lastname, email=email, phone=phone, joined_date=joined_date,password=repeatPass, tipoUsuario=tipoUsuario)
                pintor.save()
-               
-               return redirect('loginn')
+               request.session['firstname'] = pintor.firstname
+               return redirect('login')
         else:
            form = RegistroForm()
            context = {'form': form}
@@ -192,7 +202,8 @@ def registro(request):
       context = {'form': form}
 
       return HttpResponse(template.render(context,request))
-@requiere_usuario('admin')
+
+
 def registroAdmin(request):
    template = loader.get_template("registro.html")
    
@@ -218,7 +229,7 @@ def registroAdmin(request):
                pintor = Pintor(firstname=firstname, lastname=lastname, email=email, phone=phone, joined_date=joined_date,password=repeatPass, tipoUsuario=tipoUsuario)
                pintor.save()
                
-               return redirect('loginn')
+               return redirect('login')
         else:
            form = RegistroForm()
            context = {'form': form}
@@ -262,11 +273,11 @@ def logout(request):
 
 @requiere_usuario('admin')
 def lista_pinturas(request):
-    # Obtener todas las pinturas
+    # obtiene todas las pinturas
     pinturas = Pintura.objects.all()
 
     if request.method == 'POST':
-        # Si el formulario es enviado, obtener la pintura y cambiar su estado
+       
         pintura_id = request.POST.get('pintura_id')
         estado = request.POST.get('estado')
 
@@ -275,12 +286,27 @@ def lista_pinturas(request):
             pintura.estado = estado
             pintura.save()
      
-            return redirect('planillaPinturasAdmin')  # Redirigir a la misma página para mostrar los cambios
+            return redirect('planillaPinturasAdmin')  
 
     return render(request, 'planillaPinturasAdmin.html', {'pinturas': pinturas})
 
 
+def pinturas_pintor(request):
+    usuario_id = request.session.get('usuario_id')
+    if usuario_id is None:
+        return redirect('login')  #verifica si no hay un usuario logueado
 
+    pinturas = Pintura.objects.filter(id=usuario_id, estado="aprobado")
 
-
+    return render(request, 'misPinturasAprobadas.html', {'pinturas': pinturas})
     
+
+def mis_pinturas(request):
+    usuario_id = request.session.get('usuario_id')
+    if usuario_id is None:
+        return redirect('login')  #verifica si no hay un usuario logueado
+
+    # Obtener todas las pinturas del pintor en la sesión actual
+    pinturas = Pintura.objects.filter(id=usuario_id)
+
+    return render(request, 'misPinturas.html', {'pinturas': pinturas})
